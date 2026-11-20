@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetyka a medycyna regeneracyjna tkanek — Prezentacja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-void: #02070c;
+            --bg-base: #040d14;
+            --bg-panel: #071520;
+            --bg-raised: #0b1e2c;
+            --chroma: #22e0ff;
+            --chroma-bright: #7ff0ff;
+            --chroma-deep: #0a3a48;
+            --substrate: #35d47f;
+            --warn: #ffc635;
+            --text-primary: #d8e4eb;
+            --text-secondary: #8b98a0;
+            --text-muted: #4d5b63;
+            --border: rgba(34, 224, 255, 0.2);
+            --border-glow: rgba(34, 224, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-void);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #0a2636 0%, transparent 65%),
+                linear-gradient(rgba(34, 224, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 224, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 48px 48px, 48px 48px;
+        }
+
+        /* Top Header */
+        header {
+            height: 64px;
+            background: rgba(4, 13, 20, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--substrate);
+            box-shadow: 0 0 10px var(--substrate);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .brand-text h1 {
+            font-size: 14px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--chroma-bright);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-text p {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            background: rgba(34, 224, 255, 0.08);
+            border: 1px solid var(--border);
+            color: var(--chroma-bright);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: rgba(34, 224, 255, 0.2);
+            border-color: var(--chroma);
+            box-shadow: 0 0 14px rgba(34, 224, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--chroma);
+            color: #02070c;
+            border-color: var(--chroma-bright);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: var(--chroma-bright);
+            color: #000;
+            box-shadow: 0 0 20px rgba(34, 224, 255, 0.6);
+        }
+
+        /* Main Workspace Layout */
+        main {
+            flex: 1;
+            max-width: 1500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px;
+        }
+
+        @media (max-width: 1100px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Screen Stage / Player */
+        .stage-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .stage-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .stage-bar {
+            height: 42px;
+            background: rgba(11, 30, 44, 0.7);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+        }
+
+        .stage-modes {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .tab-btn.active {
+            background: rgba(34, 224, 255, 0.15);
+            border-color: var(--chroma);
+            color: var(--chroma-bright);
+            font-weight: 700;
+        }
+
+        .viewport-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background: #000;
+        }
+
+        .viewport-wrapper iframe, .viewport-wrapper embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Sidebar & Telemetry */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .sidebar-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(34, 224, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .card-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--chroma);
+            letter-spacing: 0.5px;
+        }
+
+        .qr-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background: rgba(4, 13, 20, 0.6);
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+        }
+
+        .qr-box img {
+            width: 160px;
+            height: 160px;
+            border-radius: 6px;
+            background: #fff;
+            padding: 6px;
+        }
+
+        .qr-hint {
+            font-size: 10px;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.4;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Agenda list */
+        .agenda-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 340px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .agenda-item {
+            background: rgba(11, 30, 44, 0.4);
+            border: 1px solid rgba(34, 224, 255, 0.08);
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 11px;
+            line-height: 1.35;
+            transition: all 0.2s;
+        }
+
+        .agenda-item:hover {
+            border-color: var(--chroma);
+            background: rgba(34, 224, 255, 0.08);
+        }
+
+        .agenda-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--chroma);
+            margin-right: 6px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 16px 28px;
+            background: rgba(4, 13, 20, 0.9);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hotkeys {
+            display: flex;
+            gap: 16px;
+        }
+
+        .kbd {
+            background: rgba(34, 224, 255, 0.1);
+            border: 1px solid var(--border);
+            color: var(--chroma-bright);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand">
+            <div class="pulse-dot"></div>
+            <div class="brand-text">
+                <h1>GENETYKA // MEDYCYNA REGENERACYJNA</h1>
+                <p>KENDRA CLINICAL FORGE · PIOTR MARTWICKI</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <a href="https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/present" target="_blank" class="btn btn-primary">
+                🚀 PEŁNY EKRAN (POKAZ SLAJDÓW)
+            </a>
+            <a href="https://drive.google.com/file/d/1uJ6cAesO41DyWcLVl1GXx2IU1E3Gl9Zv/view" target="_blank" class="btn">
+                📄 POBIERZ PDF
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Stage / Presenter Viewport -->
+        <div class="stage-container">
+            <div class="stage-card">
+                <div class="stage-bar">
+                    <div class="stage-modes">
+                        <button class="tab-btn active" id="btnSlides" onclick="switchMode('slides')">GOOGLE SLIDES</button>
+                        <button class="tab-btn" id="btnPdf" onclick="switchMode('pdf')">PODGLĄD PDF</button>
+                    </div>
+                    <span style="color: var(--chroma); font-size: 10px;">AKTYWNA SESJA PREZENTACJI (21 SLAJDÓW)</span>
+                </div>
+
+                <div class="viewport-wrapper" id="viewport">
+                    <iframe 
+                        id="stageFrame"
+                        src="https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/embed?start=false&loop=false&delayms=3000" 
+                        allowfullscreen="true" 
+                        mozallowfullscreen="true" 
+                        webkitallowfullscreen="true">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar / Telemetry -->
+        <aside class="sidebar">
+            <!-- QR Card -->
+            <div class="sidebar-card">
+                <div class="card-header">
+                    <span class="card-title">📱 DLA WYKŁADOWCY / SALI</span>
+                    <span style="font-size: 9px; color: var(--substrate); font-family: 'JetBrains Mono', monospace;">LIVE QR</span>
+                </div>
+                <div class="qr-box">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/present" alt="QR Kod do prezentacji">
+                    <p class="qr-hint">Zeskanuj telefonem, aby otworzyć prezentację i mieć slajdy u siebie.</p>
+                </div>
+            </div>
+
+            <!-- Agenda Card -->
+            <div class="sidebar-card">
+                <div class="card-header">
+                    <span class="card-title">📑 STRUKTURA ZAGADNIEŃ</span>
+                    <span style="font-size: 9px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">21 SLAJDÓW</span>
+                </div>
+                <ul class="agenda-list">
+                    <li class="agenda-item"><span class="agenda-num">01-02</span> Wprowadzenie i agenda kliniczna</li>
+                    <li class="agenda-item"><span class="agenda-num">03-04</span> Regeneracja: ssaki vs niższe kręgowce & komórki satelitowe Pax7</li>
+                    <li class="agenda-item"><span class="agenda-num">05-06</span> Mechanotransdukcja & pamięć mięśniowa w DNA (epigenetyka)</li>
+                    <li class="agenda-item"><span class="agenda-num">07-08</span> Miostatyna (mięśnie) & Sklerostyna (kość)</li>
+                    <li class="agenda-item"><span class="agenda-num">09-11</span> Dystrofia Duchenne'a & SMA (Nusinersen, Zolgensma)</li>
+                    <li class="agenda-item"><span class="agenda-num">12-13</span> CRISPR-Cas9 & motylkowa skóra (EB)</li>
+                    <li class="agenda-item"><span class="agenda-num">14-16</span> Komórki iPS (czynniki Yamanaki) & regeneracja tkanek</li>
+                    <li class="agenda-item"><span class="agenda-num">17-18</span> Zastosowanie w fizjoterapii & podsumowanie</li>
+                    <li class="agenda-item"><span class="agenda-num">19-21</span> Pytania egzaminacyjne & bibliografia</li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div>NODE: KENDRA-PC // HYPRLAND-UWSM · ARCH LINUX 7.2.11</div>
+        <div class="hotkeys">
+            <span>PEŁNY EKRAN: <span class="kbd">F11</span></span>
+            <span>POKAZ SLAJDÓW: <span class="kbd">Ctrl + F5</span></span>
+            <span>NAWIGACJA: <span class="kbd">Spacja</span> / <span class="kbd">← →</span></span>
+        </div>
+    </footer>
+
+    <script>
+        function switchMode(mode) {
+            const frame = document.getElementById('stageFrame');
+            const btnSlides = document.getElementById('btnSlides');
+            const btnPdf = document.getElementById('btnPdf');
+
+            if (mode === 'slides') {
+                frame.src = "https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/embed?start=false&loop=false&delayms=3000";
+                btnSlides.classList.add('active');
+                btnPdf.classList.remove('active');
+            } else {
+                frame.src = "https://drive.google.com/file/d/1uJ6cAesO41DyWcLVl1GXx2IU1E3Gl9Zv/preview";
+                btnPdf.classList.add('active');
+                btnSlides.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
