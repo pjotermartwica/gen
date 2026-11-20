@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genetyka a medycyna regeneracyjna tkanek — Prezentacja</title>
+    <title>Genetica et Medicina Regenerativa — Clinical Forge</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-void: #02070c;
@@ -22,7 +22,6 @@
             --text-secondary: #8b98a0;
             --text-muted: #4d5b63;
             --border: rgba(34, 224, 255, 0.2);
-            --border-glow: rgba(34, 224, 255, 0.4);
         }
 
         * {
@@ -46,11 +45,11 @@
             background-size: 100% 100%, 48px 48px, 48px 48px;
         }
 
-        /* Top Header */
+        /* Top Monolith Bar */
         header {
-            height: 64px;
-            background: rgba(4, 13, 20, 0.85);
-            backdrop-filter: blur(12px);
+            height: 58px;
+            background: rgba(4, 13, 20, 0.90);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
@@ -68,68 +67,67 @@
         }
 
         .pulse-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--substrate);
-            box-shadow: 0 0 10px var(--substrate);
+            box-shadow: 0 0 8px var(--substrate);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
+            50% { opacity: 0.35; transform: scale(0.85); }
         }
 
         .brand-text h1 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
             color: var(--chroma-bright);
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .brand-text p {
-            font-size: 10px;
-            color: var(--text-secondary);
+            font-size: 9px;
+            color: var(--text-muted);
             font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.5px;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .btn {
             background: rgba(34, 224, 255, 0.08);
             border: 1px solid var(--border);
             color: var(--chroma-bright);
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 7px 14px;
+            border-radius: 4px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 10px;
+            font-weight: 700;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
 
         .btn:hover {
-            background: rgba(34, 224, 255, 0.2);
+            background: rgba(34, 224, 255, 0.22);
             border-color: var(--chroma);
-            box-shadow: 0 0 14px rgba(34, 224, 255, 0.3);
-            transform: translateY(-1px);
+            box-shadow: 0 0 14px rgba(34, 224, 255, 0.35);
         }
 
         .btn-primary {
             background: var(--chroma);
             color: #02070c;
             border-color: var(--chroma-bright);
-            font-weight: 700;
         }
 
         .btn-primary:hover {
@@ -138,67 +136,61 @@
             box-shadow: 0 0 20px rgba(34, 224, 255, 0.6);
         }
 
-        /* Main Workspace Layout */
+        /* Workspace Grid */
         main {
             flex: 1;
-            max-width: 1500px;
+            max-width: 1560px;
             width: 100%;
             margin: 0 auto;
-            padding: 24px;
+            padding: 20px 24px;
             display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 24px;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1080px) {
             main {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Screen Stage / Player */
-        .stage-container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
+        /* Stage Card */
         .stage-card {
             background: var(--bg-panel);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
-            position: relative;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
         }
 
         .stage-bar {
-            height: 42px;
-            background: rgba(11, 30, 44, 0.7);
+            height: 38px;
+            background: rgba(11, 30, 44, 0.65);
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
+            padding: 0 14px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .stage-modes {
             display: flex;
-            gap: 6px;
+            gap: 4px;
         }
 
         .tab-btn {
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 9px;
             font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.15s;
         }
@@ -207,17 +199,29 @@
             background: rgba(34, 224, 255, 0.15);
             border-color: var(--chroma);
             color: var(--chroma-bright);
+        }
+
+        .stage-status {
+            color: var(--chroma);
+            font-size: 9px;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .viewport-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%; /* 16:9 ratio */
             background: #000;
         }
 
-        .viewport-wrapper iframe, .viewport-wrapper embed {
+        .viewport-wrapper:fullscreen {
+            padding-top: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .viewport-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -226,123 +230,120 @@
             border: none;
         }
 
-        /* Sidebar & Telemetry */
+        /* Sidebar Column */
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
         .sidebar-card {
             background: var(--bg-panel);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(34, 224, 255, 0.1);
-            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(34, 224, 255, 0.12);
+            padding-bottom: 8px;
         }
 
         .card-title {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: var(--chroma);
             letter-spacing: 0.5px;
         }
 
-        .qr-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            background: rgba(4, 13, 20, 0.6);
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px dashed var(--border);
+        .card-tag {
+            font-size: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--substrate);
+            border: 1px solid rgba(53, 212, 127, 0.3);
+            padding: 1px 5px;
+            border-radius: 3px;
         }
 
-        .qr-box img {
-            width: 160px;
-            height: 160px;
+        .qr-core {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(4, 13, 20, 0.7);
+            padding: 12px;
             border-radius: 6px;
+            border: 1px solid rgba(34, 224, 255, 0.12);
+        }
+
+        .qr-core img {
+            width: 150px;
+            height: 150px;
             background: #fff;
             padding: 6px;
+            border-radius: 4px;
         }
 
-        .qr-hint {
-            font-size: 10px;
-            color: var(--text-secondary);
-            text-align: center;
-            line-height: 1.4;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Agenda list */
-        .agenda-list {
+        /* Schema Index */
+        .schema-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 340px;
-            overflow-y: auto;
-            padding-right: 4px;
+            gap: 6px;
         }
 
-        .agenda-item {
-            background: rgba(11, 30, 44, 0.4);
+        .schema-item {
+            background: rgba(11, 30, 44, 0.45);
             border: 1px solid rgba(34, 224, 255, 0.08);
-            border-radius: 6px;
-            padding: 10px 12px;
-            font-size: 11px;
-            line-height: 1.35;
-            transition: all 0.2s;
+            border-radius: 4px;
+            padding: 8px 10px;
+            font-size: 10px;
+            line-height: 1.3;
+            color: var(--text-secondary);
         }
 
-        .agenda-item:hover {
+        .schema-item:hover {
             border-color: var(--chroma);
-            background: rgba(34, 224, 255, 0.08);
+            color: var(--text-primary);
         }
 
-        .agenda-num {
+        .schema-idx {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
-            color: var(--chroma);
+            color: var(--chroma-bright);
             margin-right: 6px;
         }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--border);
-            padding: 16px 28px;
-            background: rgba(4, 13, 20, 0.9);
+            padding: 12px 28px;
+            background: rgba(4, 13, 20, 0.95);
             font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-muted);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .hotkeys {
+        .telemetry-pills {
             display: flex;
-            gap: 16px;
+            gap: 14px;
         }
 
         .kbd {
-            background: rgba(34, 224, 255, 0.1);
+            background: rgba(34, 224, 255, 0.08);
             border: 1px solid var(--border);
-            color: var(--chroma-bright);
-            padding: 2px 6px;
-            border-radius: 4px;
+            color: var(--chroma);
+            padding: 1px 5px;
+            border-radius: 3px;
             font-weight: 700;
         }
     </style>
@@ -354,32 +355,34 @@
         <div class="brand">
             <div class="pulse-dot"></div>
             <div class="brand-text">
-                <h1>GENETYKA // MEDYCYNA REGENERACYJNA</h1>
+                <h1>GENETICA // MEDICINA REGENERATIVA</h1>
                 <p>KENDRA CLINICAL FORGE · PIOTR MARTWICKI</p>
             </div>
         </div>
 
         <div class="header-actions">
-            <a href="https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/present" target="_blank" class="btn btn-primary">
-                🚀 PEŁNY EKRAN (POKAZ SLAJDÓW)
+            <button class="btn btn-primary" onclick="launchInPageFullscreen()">
+                ⛶ FULLSCREEN (IN-PAGE)
+            </button>
+            <a href="https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/present" target="_blank" class="btn">
+                ↗ PRESENT VIEW
             </a>
             <a href="https://drive.google.com/file/d/1uJ6cAesO41DyWcLVl1GXx2IU1E3Gl9Zv/view" target="_blank" class="btn">
-                📄 POBIERZ PDF
+                ↓ PDF SOURCE
             </a>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Workspace -->
     <main>
-        <!-- Stage / Presenter Viewport -->
         <div class="stage-container">
             <div class="stage-card">
                 <div class="stage-bar">
                     <div class="stage-modes">
-                        <button class="tab-btn active" id="btnSlides" onclick="switchMode('slides')">GOOGLE SLIDES</button>
-                        <button class="tab-btn" id="btnPdf" onclick="switchMode('pdf')">PODGLĄD PDF</button>
+                        <button class="tab-btn active" id="btnSlides" onclick="switchMode('slides')">SLIDES // ENGINE</button>
+                        <button class="tab-btn" id="btnPdf" onclick="switchMode('pdf')">DOCUMENTUM // PDF</button>
                     </div>
-                    <span style="color: var(--chroma); font-size: 10px;">AKTYWNA SESJA PREZENTACJI (21 SLAJDÓW)</span>
+                    <span class="stage-status">21 PLATES // SYNAPSE ACTIVE</span>
                 </div>
 
                 <div class="viewport-wrapper" id="viewport">
@@ -394,36 +397,34 @@
             </div>
         </div>
 
-        <!-- Sidebar / Telemetry -->
         <aside class="sidebar">
-            <!-- QR Card -->
+            <!-- QR Card (Clean without cheesy subtitles) -->
             <div class="sidebar-card">
                 <div class="card-header">
-                    <span class="card-title">📱 DLA WYKŁADOWCY / SALI</span>
-                    <span style="font-size: 9px; color: var(--substrate); font-family: 'JetBrains Mono', monospace;">LIVE QR</span>
+                    <span class="card-title">QR // ACCESS BEACON</span>
+                    <span class="card-tag">ONLINE</span>
                 </div>
-                <div class="qr-box">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/present" alt="QR Kod do prezentacji">
-                    <p class="qr-hint">Zeskanuj telefonem, aby otworzyć prezentację i mieć slajdy u siebie.</p>
+                <div class="qr-core">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://docs.google.com/presentation/d/1oZdVLwvxvAtkpOVUZCdlvu3MISQj_L0J/present" alt="QR Access Beacon">
                 </div>
             </div>
 
-            <!-- Agenda Card -->
+            <!-- Schema Structure -->
             <div class="sidebar-card">
                 <div class="card-header">
-                    <span class="card-title">📑 STRUKTURA ZAGADNIEŃ</span>
-                    <span style="font-size: 9px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">21 SLAJDÓW</span>
+                    <span class="card-title">INDEX // 21 PLATES</span>
+                    <span class="card-tag">SCHEMA</span>
                 </div>
-                <ul class="agenda-list">
-                    <li class="agenda-item"><span class="agenda-num">01-02</span> Wprowadzenie i agenda kliniczna</li>
-                    <li class="agenda-item"><span class="agenda-num">03-04</span> Regeneracja: ssaki vs niższe kręgowce & komórki satelitowe Pax7</li>
-                    <li class="agenda-item"><span class="agenda-num">05-06</span> Mechanotransdukcja & pamięć mięśniowa w DNA (epigenetyka)</li>
-                    <li class="agenda-item"><span class="agenda-num">07-08</span> Miostatyna (mięśnie) & Sklerostyna (kość)</li>
-                    <li class="agenda-item"><span class="agenda-num">09-11</span> Dystrofia Duchenne'a & SMA (Nusinersen, Zolgensma)</li>
-                    <li class="agenda-item"><span class="agenda-num">12-13</span> CRISPR-Cas9 & motylkowa skóra (EB)</li>
-                    <li class="agenda-item"><span class="agenda-num">14-16</span> Komórki iPS (czynniki Yamanaki) & regeneracja tkanek</li>
-                    <li class="agenda-item"><span class="agenda-num">17-18</span> Zastosowanie w fizjoterapii & podsumowanie</li>
-                    <li class="agenda-item"><span class="agenda-num">19-21</span> Pytania egzaminacyjne & bibliografia</li>
+                <ul class="schema-list">
+                    <li class="schema-item"><span class="schema-idx">01-02</span> Prooemium & Scopus Clinicus</li>
+                    <li class="schema-item"><span class="schema-idx">03-04</span> Regeneratio Vertebratorum & Cellulae Satellites Pax7</li>
+                    <li class="schema-item"><span class="schema-idx">05-06</span> Mechanotransductio & Memoria Epigenetica DNA</li>
+                    <li class="schema-item"><span class="schema-idx">07-08</span> Myostatinum (MSTN) & Sclerostinum (SOST)</li>
+                    <li class="schema-item"><span class="schema-idx">09-11</span> Dystrophia Muscularis Duchenne & Atrophia Spinalis SMA</li>
+                    <li class="schema-item"><span class="schema-idx">12-13</span> CRISPR-Cas9 & Epidermolysis Bullosa</li>
+                    <li class="schema-item"><span class="schema-idx">14-16</span> Cellulae iPS (Yamanaka) & Rejuvenatio</li>
+                    <li class="schema-item"><span class="schema-idx">17-18</span> Applicatio Physiotherapeutica & Conclusio</li>
+                    <li class="schema-item"><span class="schema-idx">19-21</span> Quaestiones Examinatoriae & Bibliographia</li>
                 </ul>
             </div>
         </aside>
@@ -431,11 +432,11 @@
 
     <!-- Footer -->
     <footer>
-        <div>NODE: KENDRA-PC // HYPRLAND-UWSM · ARCH LINUX 7.2.11</div>
-        <div class="hotkeys">
-            <span>PEŁNY EKRAN: <span class="kbd">F11</span></span>
-            <span>POKAZ SLAJDÓW: <span class="kbd">Ctrl + F5</span></span>
-            <span>NAWIGACJA: <span class="kbd">Spacja</span> / <span class="kbd">← →</span></span>
+        <div>NODE: KENDRA // HYPRLAND-UWSM · ARCH LINUX 7.2.11</div>
+        <div class="telemetry-pills">
+            <span>FULLSCREEN: <span class="kbd">F11</span></span>
+            <span>PRESENT: <span class="kbd">Ctrl + F5</span></span>
+            <span>NAV: <span class="kbd">Space</span> / <span class="kbd">← →</span></span>
         </div>
     </footer>
 
@@ -453,6 +454,23 @@
                 frame.src = "https://drive.google.com/file/d/1uJ6cAesO41DyWcLVl1GXx2IU1E3Gl9Zv/preview";
                 btnPdf.classList.add('active');
                 btnSlides.classList.remove('active');
+            }
+        }
+
+        function launchInPageFullscreen() {
+            const vp = document.getElementById('viewport');
+            if (!document.fullscreenElement) {
+                if (vp.requestFullscreen) {
+                    vp.requestFullscreen();
+                } else if (vp.webkitRequestFullscreen) {
+                    vp.webkitRequestFullscreen();
+                } else if (vp.mozRequestFullScreen) {
+                    vp.mozRequestFullScreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
             }
         }
     </script>
